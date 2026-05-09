@@ -1,0 +1,25 @@
+{
+  "strategy_name": "SP500 Trend Allocator with Sector Caps",
+  "engine": "QuantConnect",
+  "brokerage_target": "Alpaca Paper via QuantConnect",
+  "universe": "SPY ETF constituents",
+  "fallbacks": {
+    "risk_off": "BIL",
+    "startup_risk_on": "SPY"
+  },
+  "parameters": {
+    "MAX_HOLDINGS": 10,
+    "MAX_POSITION_WEIGHT": 0.12,
+    "BREADTH_THRESHOLD": 0.55,
+    "RISK_ON_EQUITY_ALLOC": 0.9,
+    "MIN_MOMENTUM_6M": 0.0,
+    "MIN_MOMENTUM_12M": 0.0,
+    "MAX_NAMES_PER_SECTOR": 2
+  },
+  "rules": [
+    "No direct Alpaca order placement from this repo",
+    "QuantConnect remains trading engine",
+    "Claude may not deploy strategy changes without approval",
+    "No crypto, no options, no shorting by default"
+  ]
+}

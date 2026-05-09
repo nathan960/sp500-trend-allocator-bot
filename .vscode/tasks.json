@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "alpaca-account",
+      "type": "shell",
+      "command": "source .venv/bin/activate && bash scripts/alpaca.sh account && bash scripts/alpaca.sh positions && bash scripts/alpaca.sh orders open",
+      "problemMatcher": []
+    },
+    {
+      "label": "risk-review",
+      "type": "shell",
+      "command": "source .venv/bin/activate && python scripts/risk_review.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "summarize-logs",
+      "type": "shell",
+      "command": "source .venv/bin/activate && python scripts/summarize_logs.py",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "updated_at": null,
+  "paper_mode": true,
+  "strategy_engine": "QuantConnect",
+  "brokerage": "Alpaca Paper",
+  "paused": false,
+  "pause_reason": null,
+  "approved_strategy_hash": "",
+  "last_qc_deployment_check": null,
+  "last_alpaca_account_check": null
+}

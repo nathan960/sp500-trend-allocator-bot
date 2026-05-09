@@ -48,3 +48,68 @@ INSUFFICIENT PAPER DATA — WEEKLY-REVIEW.md contains no paper trading entries. 
 3. Accumulate at least 14 days of paper trading data before paper vs. backtest comparison.
 4. Record BIL trigger frequency and duration in future backtest notes.
 5. Document SPY startup fallback duration and any drift it introduces.
+
+---
+
+## Review 2026-05-09 (Second pass — 21:44 UTC)
+
+### Account snapshot
+
+- Equity: $99,619.78 | Cash: $99,619.78 (100% cash — no positions)
+- Day P&L: +$72.21 | Drawdown from HWM: 0.00%
+- HWM: $99,619.78 (set 2026-05-09)
+
+### Evidence counted
+
+- Paper trading days: **1** (2026-05-09 only — minimum 14 required)
+- Signal checks reviewed: **3** (all 2026-05-09)
+- Trade execution events reviewed: **2** (both DRY_RUN, both post-market)
+- Complete entry/exit cycles: **0**
+- Real orders placed: **0**
+
+### Evidence sufficiency
+
+**INSUFFICIENT** — still below the 14-day minimum. However, a clear operational pattern has been identified and is documented below under operational health.
+
+### Operational health
+
+**Finding — Post-market execution timing (moderate concern):**
+Both trade execution runs occurred at 21:24 UTC and 21:27 UTC (5:24–5:27 PM ET). US markets close at 20:00 UTC (4:00 PM ET). This means execution was triggered ~85 minutes after market close.
+
+Impact observed: 8 of 11 target positions (KO, WMT, GOOGL, MRK, XOM, NVDA, LLY, AVGO) were tagged `skipped_wide_spread`. These are highly liquid S&P 500 constituents with typical intra-day spreads of 1–5 bps, well below the 100 bps maximum. Post-close, bid-ask data from Alpaca is stale or absent, producing artificially wide computed spreads. The spread guard is **working correctly** — it is correctly rejecting stale quotes — but the root cause is that execution is being run outside market hours.
+
+Three positions (PEP, AMZN, AMD) reached `dry_run` status, suggesting their post-close quote data happened to satisfy the spread check. This inconsistency further confirms the issue is data quality at execution time, not the stocks themselves.
+
+**What the market clock guard did:** The guard prevented zero actual orders (DRY_RUN=true handles that separately). It did not prevent the execution routine from running and performing the spread check against stale data.
+
+**No other operational errors:** No duplicate orders, no unexplained positions, no API errors, no strategy hash mismatch.
+
+### Top concerns
+
+1. **Post-market execution timing**: Scheduler triggering trade execution after close causes most orders to hit the spread guard. Before DRY_RUN is removed, execution timing must be verified or the clock guard must cleanly short-circuit the run before spread checks occur.
+2. **PSR = 14% from backtest**: Carries forward — no new paper data to confirm or refute.
+3. **Max drawdown = 34.9% from backtest**: Carries forward.
+4. **No real positions yet**: Portfolio has been 100% cash since inception. No paper trading evidence of live execution behavior.
+
+### Ideas proposed
+
+All four candidate experiments (A–D) from the prior 2026-05-09 review carry forward unchanged. No new parameter-change hypotheses added this pass due to insufficient data.
+
+**New operational idea (not a parameter change):**
+- **Execution timing diagnostic**: Verify that the trade execution scheduler fires only within market hours, or that the market clock guard is wired to exit cleanly before the spread-check loop when the market is closed. This is a diagnostic action, not a strategy parameter change. Files potentially involved: `scripts/run_trade_execution.py`. No config/strategy.json edit required.
+
+### Ideas rejected this pass
+
+- No new ideas rejected.
+- Options, crypto, shorting, leverage, discretionary overrides: standing rejections per CLAUDE.md.
+
+### Ideas deferred
+
+- Secondary 50-day SMA regime filter (Hypothesis 4 from prior review): deferred pending paper data.
+- Position-level trailing stop (Hypothesis 5 from prior review): deferred pending paper data.
+
+### Candidate PR justified?
+
+**No.** Insufficient paper trading evidence (1 day, 0 real trades). The execution timing issue is a diagnostic concern, not yet confirmed as a bug requiring a code change — it may be intentional design for the DRY_RUN validation workflow.
+
+Decision: insufficient evidence — continue collecting data.

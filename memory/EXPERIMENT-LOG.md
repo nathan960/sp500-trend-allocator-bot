@@ -73,3 +73,23 @@ Paper data status: INSUFFICIENT (< 14 days). All experiments below are candidate
 - PSR > 20%
 
 **Test plan**: Run QuantConnect backtest over the same date range as the 2026-05-09 baseline. Record all metrics. Do not promote without human review.
+
+---
+
+## 2026-05-09 (Second pass — 21:44 UTC) — No Experiment Started
+
+**Experiment decision**: No experiment started.
+
+**Reason**: Paper trading data is still at day 1. Minimum threshold is 14 calendar days of paper trading evidence before any experiment can be started. Additionally, an operational finding (post-market execution triggering spread-guard rejections on 8/11 liquid positions) must be investigated and resolved before experiment baselines can be trusted. Starting an experiment against a baseline with known timing irregularities would produce confounded results.
+
+**Carry-forward status of prior candidates:**
+
+| ID | Name | Status |
+|----|------|--------|
+| A | Raise BREADTH_THRESHOLD 0.55 → 0.62 | Candidate — awaiting 14 days paper data |
+| B | Increase MAX_HOLDINGS 10 → 20 | Candidate — awaiting 14 days paper data |
+| C | Lower MAX_POSITION_WEIGHT 0.12 → 0.08 | Candidate — awaiting 14 days paper data |
+| D | Reduce RISK_ON_EQUITY_ALLOC 0.90 → 0.80 | Candidate — awaiting 14 days paper data |
+
+**New diagnostic item (not an experiment):**
+- Inspect `scripts/run_trade_execution.py` for market clock guard short-circuit logic. Confirm whether a post-close run is intentional (for DRY_RUN validation) or a scheduling error. Log findings in next WEEKLY-REVIEW.md. No production file change without human approval.

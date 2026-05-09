@@ -1,25 +1,50 @@
 {
   "strategy_name": "SP500 Trend Allocator with Sector Caps",
-  "engine": "QuantConnect",
-  "brokerage_target": "Alpaca Paper via QuantConnect",
-  "universe": "SPY ETF constituents",
+  "strategy_version": "2.0",
+  "engine": "alpaca_direct",
+  "brokerage_target": "Alpaca Paper",
+  "universe_config": "config/universe.json",
+  "sector_config": "config/sector_map.json",
+  "paper_first": true,
   "fallbacks": {
     "risk_off": "BIL",
-    "startup_risk_on": "SPY"
+    "benchmark": "SPY"
   },
   "parameters": {
-    "MAX_HOLDINGS": 10,
-    "MAX_POSITION_WEIGHT": 0.12,
-    "BREADTH_THRESHOLD": 0.55,
-    "RISK_ON_EQUITY_ALLOC": 0.9,
-    "MIN_MOMENTUM_6M": 0.0,
-    "MIN_MOMENTUM_12M": 0.0,
-    "MAX_NAMES_PER_SECTOR": 2
+    "starting_equity": 100000,
+    "risk_on_equity_alloc": 0.95,
+    "max_gross_exposure": 0.95,
+    "cash_buffer": 0.05,
+    "max_position_weight": 0.15,
+    "max_holdings": 12,
+    "max_names_per_sector": 3,
+    "breadth_threshold": 0.50,
+    "rebalance_threshold": 0.02,
+    "min_notional_usd": 25,
+    "fast_lookback": 126,
+    "slow_lookback": 252,
+    "trend_lookback": 200,
+    "atr_lookback": 20,
+    "min_momentum_6m": 0,
+    "min_momentum_12m": 0,
+    "stale_data_minutes": 60,
+    "stop_loss_pct": 0.20,
+    "trailing_stop_pct": 0.35,
+    "max_daily_loss_pct": 0.02,
+    "max_drawdown_pct": 0.20,
+    "fee_bps": 0,
+    "slippage_bps": 5,
+    "spread_buffer_bps": 5,
+    "max_spread_bps": 100
   },
   "rules": [
-    "No direct Alpaca order placement from this repo",
-    "QuantConnect remains trading engine",
-    "Claude may not deploy strategy changes without approval",
-    "No crypto, no options, no shorting by default"
+    "US equities only — no options, no crypto, no shorting",
+    "Paper trading first (paper_first=true)",
+    "DRY_RUN=true blocks all order submission",
+    "TRADING_MODE=live requires LIVE_TRADING_CONFIRMED=true",
+    "Market clock guard blocks orders when closed",
+    "Stage 1 (market data update) may never place orders",
+    "Stage 2 (trade execution) fails closed if plan is missing, stale, or unapproved",
+    "Claude may not modify this file without explicit human approval"
   ]
 }

@@ -7,5 +7,11 @@
   "pause_reason": null,
   "approved_strategy_hash": "",
   "last_qc_deployment_check": null,
-  "last_alpaca_account_check": null
+  "last_alpaca_account_check": null,
+  "high_water_mark": 99619.78,
+  "high_water_mark_date": "2026-05-09",
+  "day_start_equity": 99619.78,
+  "day_start_date": "2026-05-09",
+  "last_run_trade_execution": "2026-05-09T21:24:43.412826+00:00",
+  "last_run_daily_summary": "2026-05-09T21:25:02.657003+00:00"
 }

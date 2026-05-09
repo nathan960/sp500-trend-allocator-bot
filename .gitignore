@@ -6,3 +6,5 @@ __pycache__/
 logs/
 *.log
 .pytest_cache/
+data/latest/*.json
+data/latest/*.csv

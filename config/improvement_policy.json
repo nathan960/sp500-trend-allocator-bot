@@ -1,5 +1,5 @@
 {
-  "mode": "quantconnect_paper_research_first",
+  "mode": "alpaca_direct_paper_research_first",
   "claude_may_modify_production_main": false,
   "claude_may_deploy_quantconnect": false,
   "claude_may_place_alpaca_orders": false,
@@ -18,7 +18,9 @@
   "forbidden_auto_edit_paths": [
     "quantconnect/main.py",
     "config/strategy.json",
-    "scripts/alpaca.sh"
+    "config/universe.json",
+    "config/sector_map.json",
+    ".env"
   ],
   "required_validation": [
     "compare_to_spy_buy_hold",
@@ -31,7 +33,6 @@
   ],
   "promotion_requires": {
     "human_approval": true,
-    "new_quantconnect_backtest": true,
     "paper_validation_days": 14
   }
 }

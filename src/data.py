@@ -1,0 +1,98 @@
+"""Market data fetching and validation."""
+from datetime import datetime, timedelta, timezone
+from typing import List
+
+import pandas as pd
+
+from src.alpaca_client import AlpacaClient, AlpacaError
+
+
+def get_bars_df(
+    client: AlpacaClient, symbols: List[str], lookback_days: int = 300
+) -> pd.DataFrame:
+    """
+    Fetch daily bars via Alpaca /v2/stocks/bars.
+    Returns DataFrame with MultiIndex (symbol, date) and columns:
+    open, high, low, close, volume.
+    """
+    end = datetime.now(timezone.utc)
+    start = end - timedelta(days=lookback_days)
+    raw = client.get_bars(
+        symbols,
+        start.strftime("%Y-%m-%d"),
+        end.strftime("%Y-%m-%d"),
+    )
+    bars_by_symbol = raw.get("bars", {})
+
+    frames = []
+    for sym, bar_list in bars_by_symbol.items():
+        if not bar_list:
+            continue
+        df = pd.DataFrame(bar_list)
+        df["symbol"] = sym
+        df["date"] = pd.to_datetime(df["t"]).dt.date
+        df = df.rename(
+            columns={"o": "open", "h": "high", "l": "low", "c": "close", "v": "volume"}
+        )
+        cols = [c for c in ["symbol", "date", "open", "high", "low", "close", "volume"] if c in df.columns]
+        frames.append(df[cols].set_index(["symbol", "date"]))
+
+    if not frames:
+        return pd.DataFrame(
+            columns=["open", "high", "low", "close", "volume"],
+            index=pd.MultiIndex.from_tuples([], names=["symbol", "date"]),
+        )
+    return pd.concat(frames).sort_index()
+
+
+def bars_to_dict(bars_df: pd.DataFrame) -> dict:
+    """Serialize bars DataFrame to a plain dict (for snapshot JSON + hashing)."""
+    result = {}
+    for sym in bars_df.index.get_level_values("symbol").unique():
+        df_sym = bars_df.loc[sym].reset_index()
+        df_sym["date"] = df_sym["date"].astype(str)
+        result[sym] = df_sym.to_dict(orient="records")
+    return result
+
+
+def latest_bar_age_minutes(bars_df: pd.DataFrame) -> float:
+    """Minutes since the most recent bar date (vs today UTC)."""
+    if bars_df.empty:
+        return float("inf")
+    latest_date = max(d for _, d in bars_df.index)
+    delta = (datetime.now(timezone.utc).date() - latest_date).days
+    return float(delta * 24 * 60)
+
+
+def check_stale(bars_df: pd.DataFrame, stale_data_minutes: int) -> None:
+    """
+    Raise AlpacaError if data is too old.
+    Allows 3 calendar days for weekend/holiday gaps (Mon = Fri bars = ~3d stale).
+    """
+    age = latest_bar_age_minutes(bars_df)
+    max_minutes = max(float(stale_data_minutes), 3 * 24 * 60)
+    if age > max_minutes:
+        raise AlpacaError(
+            f"Market data is {age / 60:.1f}h old (limit {max_minutes / 60:.1f}h). "
+            "Check data feed or market schedule."
+        )
+
+
+def spread_ok(quotes_raw: dict, symbol: str, max_spread_bps: float) -> bool:
+    """
+    Return True if the bid-ask spread for symbol is within max_spread_bps.
+    Returns True (permissive) if quote data is unavailable.
+    """
+    quotes = quotes_raw.get("quotes", {})
+    q = quotes.get(symbol)
+    if not q:
+        return True
+    bid = float(q.get("bp", 0) or 0)
+    ask = float(q.get("ap", 0) or 0)
+    if bid <= 0 or ask <= 0:
+        return True
+    mid = (bid + ask) / 2.0
+    if mid <= 0:
+        return True
+    spread_bps = (ask - bid) / mid * 10_000
+    return spread_bps <= max_spread_bps

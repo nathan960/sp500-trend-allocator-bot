@@ -14,5 +14,8 @@
   "day_start_date": "2026-05-09",
   "last_run_trade_execution": "2026-05-09T21:27:41.565187+00:00",
   "last_run_daily_summary": "2026-05-09T21:43:46.690437+00:00",
-  "last_run_position_monitor": "2026-05-09T21:28:00.860443+00:00"
+  "last_run_position_monitor": "2026-05-09T21:28:00.860443+00:00",
+  "week_start_equity": 99619.78,
+  "week_start_date": "2026-05-09",
+  "last_run_weekly_review": "2026-05-09T21:44:11.847612+00:00"
 }

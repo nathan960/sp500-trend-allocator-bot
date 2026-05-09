@@ -23,3 +23,25 @@ Notes:
 - Validate exact code/report match.
 - Fix project metadata if it still says Wheel Strategy / Equity Options.
 - Compare to SPY buy-and-hold, BIL, and 60/40 equivalents.
+
+## 2026-05-09T20:05:54Z Clean QuantConnect Backtest
+
+Project: SP500 Trend Allocator Sector Caps
+
+Metrics:
+- Total return:
+- CAGR:
+- Max drawdown:
+- Sharpe:
+- Sortino:
+- PSR:
+- Trades/day:
+- Turnover:
+- Fees:
+- Drawdown recovery:
+- Final equity:
+
+Notes:
+- Confirmed strategy is S&P 500 equity allocator, not crypto/options/wheel.
+- Next step: deploy to Alpaca Paper through QuantConnect.
+

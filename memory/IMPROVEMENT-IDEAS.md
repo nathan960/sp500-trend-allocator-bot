@@ -124,3 +124,32 @@ All seven hypotheses from the 2026-05-09 review (breadth threshold, position wei
 ### Candidate PR status
 
 Not justified. Operational execution timing issue must be diagnosed first. Zero paper trading data means no parameter change is evidence-backed.
+
+---
+
+## Research Context Hypotheses — 2026-05-11
+
+*Derived from macro/market research. No paper data yet. All deferred pending execution fix and 14-day minimum paper data.*
+
+**Idea 10 — Resolve breadth_threshold config discrepancy (Governance)**
+- Observation: `config/strategy.json` sets `breadth_threshold: 0.50`; `memory/TRADING-STRATEGY.md` documents `BREADTH_THRESHOLD: 0.55`. These differ by 5 pp, which is material when live breadth reads 51.7%.
+- Hypothesis: The live system may be operating with a lower breadth bar than intended, which could result in building equity positions during marginally-supported market conditions.
+- Proposed action: Human to confirm which value governs the live/paper system and reconcile the two files.
+- Files affected: `config/strategy.json` (if change needed) and `memory/TRADING-STRATEGY.md`.
+- Evidence needed: Confirm which config field the production code reads. No backtest evidence yet.
+- Candidate PR: Not yet — governance clarification needed first.
+
+**Idea 11 — Evaluate energy exposure given Iran/oil shock (Research only)**
+- Observation: XOM is currently a top-7 target weight (~7.5%). Oil prices are volatile in the $90–120 range due to the Iran/Hormuz disruption. XOM momentum and trend are strong, so it passes the filter naturally.
+- Hypothesis: In a sustained oil-shock environment (crude sustained above $100), the strategy may naturally over-allocate to energy via momentum, increasing sector concentration risk beyond the 2-names cap.
+- Note: Current `max_names_per_sector: 3` allows up to 3 energy names at up to 15% each = 45% theoretical energy cap. This is significantly wider than the 2-name cap documented in `TRADING-STRATEGY.md` (which says `MAX_NAMES_PER_SECTOR: 2`).
+- Proposed action: Audit whether the live config values (`max_names_per_sector: 3`, `max_position_weight: 0.15`) vs. documented values (`MAX_NAMES_PER_SECTOR: 2`, `MAX_POSITION_WEIGHT: 0.12`) represent an intentional loosening or another config discrepancy.
+- Evidence needed: Review change history on `config/strategy.json`. No parameter change proposed.
+- Candidate PR: Not yet.
+
+**Idea 12 — Breadth as leading indicator of regime flip (Research hypothesis)**
+- Context: External data shows only ~52% of S&P 500 names above their 50-day MA while the index makes all-time highs. Strategy breadth (universe-specific, 28 names) mirrors this at 51.7% in the latest signal.
+- Hypothesis: Narrow breadth at index all-time highs historically precedes either (a) breadth expansion confirming the rally, or (b) breadth contraction leading to a modest correction. The strategy's SPY 200-day filter would need a sustained drawdown (typically 10–15%+ from all-time highs) to trigger risk-off — but the breadth filter could trigger first if participation deteriorates.
+- Research idea: Track strategy breadth reading across multiple consecutive signal checks to build a time series. If breadth trends downward over 2–3 weeks while the index stays near highs, that is early warning of a possible risk-off flip.
+- Evidence needed: 14+ days of daily signal logs with breadth readings.
+- Candidate PR: Not yet — monitoring hypothesis only.

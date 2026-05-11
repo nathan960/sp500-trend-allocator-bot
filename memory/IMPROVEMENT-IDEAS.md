@@ -124,3 +124,27 @@ All seven hypotheses from the 2026-05-09 review (breadth threshold, position wei
 ### Candidate PR status
 
 Not justified. Operational execution timing issue must be diagnosed first. Zero paper trading data means no parameter change is evidence-backed.
+
+---
+
+## Research Context Update 2026-05-11
+
+### Market-informed hypotheses
+
+**Idea 10 — Reconcile TRADING-STRATEGY.md with config/strategy.json (Governance)**
+- Observation: TRADING-STRATEGY.md documents MAX_HOLDINGS=10, MAX_POSITION_WEIGHT=0.12, BREADTH_THRESHOLD=0.55, MAX_NAMES_PER_SECTOR=2, RISK_ON_EQUITY_ALLOC=0.90. config/strategy.json (strategy_version 2.0) sets max_holdings=12, max_position_weight=0.15, breadth_threshold=0.50, max_names_per_sector=3, risk_on_equity_alloc=0.95. These are materially different.
+- Risk: The operative config is strategy.json, but anyone reading the strategy doc would evaluate it against the wrong parameters. Also, hypotheses from the 2026-05-09 review assumed 0.55 as the breadth threshold, but the live threshold is 0.50 — the breadth readings in the signal log (55.2%, 51.7%) are above 0.50, not 0.55.
+- Proposed action: Human to confirm which file is authoritative and update the other to match. No code change.
+- Overfit risk: None — governance documentation only.
+- Candidate PR justified: Not a code PR — documentation/governance issue for human review.
+
+**Idea 11 — Monitor breadth weekly for proximity to risk-off threshold (Operational monitoring)**
+- Observation: Breadth has declined from 55.2% to 51.7% over May 9–11. The operative threshold (config/strategy.json) is 50.0%. Only 1.7pp of cushion remains. Macro backdrop (inflation 3.3%→4.5% expected, Iran conflict, SPY RSI overbought, FOMC/CPI event calendar) could pressure breadth further.
+- Hypothesis: If breadth falls below 50% before the execution timing issue (Idea 8) is resolved, the strategy would trigger a full risk-off allocation to BIL — a meaningful event that should be logged and reviewed.
+- Proposed action: Record breadth at each signal check in SIGNAL-LOG.md (already done) and flag in weekly review if breadth drops below 52% as an early warning.
+- Overfit risk: None — monitoring only, no parameter change.
+- Candidate PR justified: No.
+
+**Ideas 1–7 status**: Remain deferred. No new evidence from paper trading. Minimum 14-day paper data requirement still unmet. Execution timing (Idea 8) is still the blocking issue.
+**Idea 8 status**: Unresolved. Human must investigate scheduler/cron timing.
+**Idea 9 status**: Deferred pending Idea 8 resolution.

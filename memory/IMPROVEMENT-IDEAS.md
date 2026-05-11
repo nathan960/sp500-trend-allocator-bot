@@ -48,3 +48,79 @@ INSUFFICIENT PAPER DATA — WEEKLY-REVIEW.md contains no paper trading entries. 
 3. Accumulate at least 14 days of paper trading data before paper vs. backtest comparison.
 4. Record BIL trigger frequency and duration in future backtest notes.
 5. Document SPY startup fallback duration and any drift it introduces.
+
+---
+
+## Review 2026-05-11
+
+### Account snapshot
+
+- Equity: $99,297.88
+- Cash: ~$99,620 (all cash — no positions held)
+- High-water mark: $99,619.78 (2026-05-09)
+- Drawdown from HWM: 0.32%
+- Regime: RISK_ON
+- Breadth: 55.2% (just above 50% threshold)
+- Eligible names: 13/28 scored (NVDA dropped out vs. May 9; QCOM entered)
+
+### Paper data status
+
+INSUFFICIENT PAPER DATA — 2 calendar days since first signal check (2026-05-09). Minimum required is 14 calendar days. Strategy is still all cash. No real orders have been submitted. Insufficient evidence for any production parameter change.
+
+Decision: insufficient evidence — continue collecting data.
+
+### Signal checks reviewed: 8 total (5 on 2026-05-09, 3 on 2026-05-11)
+
+### Trade events reviewed: 4 DRY_RUN executions — 0 real orders submitted, 0 entry/exit cycles completed
+
+### Operational health
+
+**CRITICAL CONCERN — Persistent `skipped_wide_spread` blocker:**
+All 4 logged trade execution runs show 8 of 11 planned buys rejected as `skipped_wide_spread`. Only PEP, AMZN, and AMD pass the spread check (and are tagged `[dry_run]`, not actually submitted). Affected names: KO, WMT, GOOGL, MRK, XOM, NVDA, LLY, AVGO.
+
+Root cause hypothesis: Trade execution runs appear to occur outside regular market hours (2026-05-11T12:18 UTC = 8:18 AM ET, pre-market). After-hours bid/ask spreads are inherently wide. The spread guard (`max_spread_bps: 100`) is correctly rejecting these. However, signal checks at 14:20 and 14:48 UTC (10:20 and 10:48 AM ET, during market hours) do not have corresponding trade execution log entries — suggesting the trade execution stage is not being triggered during market hours.
+
+**If this diagnosis is correct**: the strategy has never attempted a trade during market hours. No portfolio can be built until execution timing is corrected.
+
+**Other operational notes:**
+- Approved strategy hash is empty in RISK-STATE.json — no strategy version formally hash-approved.
+- Daily summary last run 2026-05-09; trade execution last run 2026-05-11 — mild staleness in daily P&L tracking.
+- Universe shift noted: NVDA left eligible set between May 9 and May 11; QCOM entered at ~4.1% target weight. This is expected behavior as momentum scores fluctuate.
+
+### Top concerns
+
+1. **Execution timing / wide spread blocker** (Operational): Trade execution may be running entirely outside market hours, causing the spread guard to block all or most orders. Strategy will remain in all-cash until this is diagnosed and fixed.
+2. **Approved strategy hash missing**: No formal hash approval in RISK-STATE.json. This is a governance gap.
+3. **Zero entry/exit cycles**: No data exists on how the strategy behaves after building a position. All prior hypotheses (from 2026-05-09) remain unvalidated.
+
+### New ideas proposed
+
+**Idea 8 — Investigate and fix execution timing (Operational — not a parameter change)**
+- Hypothesis: Trade execution is running pre-market, causing systematic spread-guard rejection. Correcting execution timing to run within the 9:45–15:45 ET window would allow the portfolio to build for the first time.
+- Evidence: All 4 trade execution log entries are timestamped pre-market or after-hours (12:18 UTC = 8:18 AM ET). Signal checks at 14:20-14:48 UTC (during market hours) lack corresponding trade execution entries.
+- Proposed change: Verify the cron/scheduler for the Stage 2 (trade execution) script and confirm it is set to fire during regular market hours (9:30–16:00 ET), not pre-market.
+- Files affected: Scheduler config or cron definition (not `quantconnect/main.py`, not `config/strategy.json`).
+- Expected benefit: Allows the portfolio to build. Without this, all other improvement ideas are moot.
+- Failure mode: If execution timing is already correct and something else causes the wide spreads, this diagnosis is wrong — check the spread data source.
+- Overfit risk: None — this is operational, not a parameter change.
+- Validation required: Confirm a trade execution log entry timestamped between 9:45 and 15:45 ET, with fewer spread rejections for liquid large-caps.
+- Pass/fail: Pass if ≥ 5 of 11 target names execute without spread rejection during market hours.
+- Rollback: N/A — no production strategy change.
+- Candidate PR justified: Not a PR — operational scheduling issue for human to investigate.
+
+**Idea 9 — Log spread values at execution time (Diagnostics)**
+- Hypothesis: Adding the observed bid/ask spread (in bps) to each trade log entry would allow direct confirmation of whether the issue is time-of-day or a data source problem.
+- Evidence: Current trade log shows `[skipped_wide_spread]` with no numerical spread value recorded. Impossible to distinguish 101 bps vs. 500 bps without this data.
+- Proposed change: Add spread bps to trade log output for each skipped and executed order.
+- Files affected: The Stage 2 execution script (not `quantconnect/main.py`).
+- Expected benefit: Immediately diagnoses whether the spread issue is timing-related or data-related.
+- Overfit risk: None — diagnostic only.
+- Candidate PR justified: Deferred — human should first check the scheduler.
+
+### Ideas deferred from 2026-05-09
+
+All seven hypotheses from the 2026-05-09 review (breadth threshold, position weight, holdings count, secondary regime filter, trailing stop, equity allocation, BIL logging) remain deferred pending 14+ days of paper data and at least one completed entry/exit cycle.
+
+### Candidate PR status
+
+Not justified. Operational execution timing issue must be diagnosed first. Zero paper trading data means no parameter change is evidence-backed.

@@ -73,3 +73,20 @@ Paper data status: INSUFFICIENT (< 14 days). All experiments below are candidate
 - PSR > 20%
 
 **Test plan**: Run QuantConnect backtest over the same date range as the 2026-05-09 baseline. Record all metrics. Do not promote without human review.
+
+---
+
+## 2026-05-11 — Review Update
+
+**Experiment decision**: No new experiment started or run.
+
+**Reason**: Paper data is insufficient (2 calendar days vs. 14-day minimum). No real trades have been submitted. No entry/exit cycle has occurred. A critical operational blocker — trade execution running outside market hours, causing systematic spread guard rejection — must be resolved before any experiment result would be meaningful.
+
+**All four candidate experiments (A, B, C, D) remain in candidate status — not yet run.**
+
+**New operational finding (not an experiment):**
+Trade execution log entries are all timestamped outside regular market hours (earliest: 12:18 UTC = 8:18 AM ET). Signal checks during market hours (14:20-14:48 UTC = 10:20-10:48 AM ET) do not have corresponding trade execution entries. This is the most likely cause of the persistent `skipped_wide_spread` pattern affecting 8/11 target names in every run.
+
+**Action required by human:** Verify the scheduler / cron job for the Stage 2 execution script and confirm it is configured to fire during regular trading hours (9:30–16:00 ET). This is not a strategy parameter change and does not require a PR — it is a scheduling investigation.
+
+**Next review trigger:** When ≥ 14 calendar days of paper data exist with at least one confirmed market-hours execution run.

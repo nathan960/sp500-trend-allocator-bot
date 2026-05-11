@@ -14,6 +14,17 @@
   "day_start_date": "2026-05-11",
   "last_run_trade_execution": "2026-05-11T12:18:22.834699+00:00",
   "last_run_daily_summary": "2026-05-09T21:43:46.690437+00:00",
-  "last_run_position_monitor": "2026-05-09T21:28:00.860443+00:00",
-  "last_run_strategy_improvement_review": "2026-05-11T17:02:41.412198+00:00"
+  "last_run_position_monitor": "2026-05-11T21:45:47.617680+00:00",
+  "last_run_strategy_improvement_review": "2026-05-11T17:02:41.412198+00:00",
+  "trailing_highs": {
+    "AMD": 458.22,
+    "AMZN": 268.6158,
+    "AVGO": 427.67,
+    "GOOGL": 389.1,
+    "KO": 78.58,
+    "MRK": 111.39,
+    "PEP": 149.4205,
+    "WMT": 127.4,
+    "XOM": 149.54
+  }
 }

@@ -1,4 +1,4 @@
-# Daily Summary — 2026-05-09
+# Daily Summary — 2026-05-11
 
 - Equity: $99,619.78
 - Cash: $99,619.78
@@ -7,17 +7,17 @@
 
 ## Target Weights
 
-- KO: 12.32%
-- WMT: 11.31%
-- PEP: 10.44%
+- KO: 13.25%
+- WMT: 11.69%
+- PEP: 10.30%
 - GOOGL: 8.81%
-- MRK: 8.01%
-- AMZN: 7.99%
-- XOM: 7.14%
-- NVDA: 6.74%
-- LLY: 6.62%
-- AVGO: 6.40%
-- AMD: 4.23%
+- MRK: 8.41%
+- AMZN: 8.21%
+- XOM: 7.54%
+- LLY: 6.79%
+- AVGO: 6.60%
+- AMD: 4.28%
+- QCOM: 4.11%
 - Cash: 10.00%
 
 ## Positions

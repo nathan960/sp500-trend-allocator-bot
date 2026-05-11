@@ -20,6 +20,7 @@ class AlpacaClient:
         self.secret_key = os.environ["ALPACA_SECRET_KEY"]
         self.base_url = os.environ.get("ALPACA_BASE_URL", PAPER_BASE_URL).rstrip("/")
         self.data_url = os.environ.get("ALPACA_DATA_URL", PAPER_DATA_URL).rstrip("/")
+        self.data_feed = os.environ.get("ALPACA_DATA_FEED", "iex").lower()
         self.dry_run = os.environ.get("DRY_RUN", "true").lower() == "true"
         self.trading_mode = os.environ.get("TRADING_MODE", "paper").lower()
         self.live_confirmed = (
@@ -50,7 +51,8 @@ class AlpacaClient:
     def _data_get(self, endpoint: str, params: dict = None):
         url = f"{self.data_url}{endpoint}"
         r = requests.get(url, headers=self._headers(), params=params, timeout=30)
-        r.raise_for_status()
+        if not r.ok:
+            raise AlpacaError(f"HTTP {r.status_code} from {endpoint}: {r.text[:300]}")
         return r.json()
 
     def _post(self, endpoint: str, payload: dict) -> dict:
@@ -92,7 +94,7 @@ class AlpacaClient:
         start: str,
         end: str,
         timeframe: str = "1Day",
-        feed: str = "iex",
+        feed: str = None,
     ) -> dict:
         """Multi-symbol daily bars from /v2/stocks/bars."""
         params = {
@@ -100,16 +102,16 @@ class AlpacaClient:
             "start": start,
             "end": end,
             "timeframe": timeframe,
-            "feed": feed,
+            "feed": feed or self.data_feed,
             "limit": 10000,
         }
         return self._data_get("/v2/stocks/bars", params=params)
 
-    def get_latest_quotes(self, symbols: list, feed: str = "iex") -> dict:
+    def get_latest_quotes(self, symbols: list, feed: str = None) -> dict:
         """Latest NBBO quotes from /v2/stocks/quotes/latest (for spread checks)."""
         params = {
             "symbols": ",".join(symbols),
-            "feed": feed,
+            "feed": feed or self.data_feed,
         }
         return self._data_get("/v2/stocks/quotes/latest", params=params)
 

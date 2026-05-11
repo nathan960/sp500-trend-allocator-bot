@@ -234,5 +234,6 @@ def append_data_log(snapshot_summary: dict) -> None:
         f"- Market: {'OPEN' if snapshot_summary.get('market_open') else 'CLOSED'}",
         f"- Account equity: {_usd(snapshot_summary.get('equity', 0))}",
         f"- Data hash: {snapshot_summary.get('data_hash', '?')}",
+        f"- Data feed: {snapshot_summary.get('data_feed', '?')}",
     ]
     _append(DATA_LOG_PATH, "\n".join(lines))

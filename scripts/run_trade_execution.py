@@ -36,7 +36,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / ".env")
 
-from src.alpaca_client import AlpacaClient
+from src.alpaca_client import AlpacaClient, AlpacaError
+from src.data import _is_feed_permission_error
 from src.execution import compute_trades, current_weights, execute_rebalance
 from src.plan import PlanError, read_plan, verify_approved, verify_freshness
 from src.reporting import append_trade_log, print_positions, print_trades, print_account_summary
@@ -167,6 +168,12 @@ def main():
     if buy_symbols:
         try:
             quotes_raw = client.get_latest_quotes(buy_symbols)
+        except AlpacaError as e:
+            if _is_feed_permission_error(str(e)):
+                print(f"\n[BLOCKED] Quote feed '{client.data_feed}' returned a subscription/permission error. "
+                      f"Set ALPACA_DATA_FEED to a supported feed. Error: {e}")
+                sys.exit(1)
+            print(f"  [warn] Quote fetch failed (non-feed error): {e} — spread check disabled for buys")
         except Exception as e:
             print(f"  [warn] Quote fetch failed: {e} — spread check disabled for buys")
 

@@ -26,8 +26,8 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 # Force DRY_RUN regardless of environment to be explicit.
 os.environ["DRY_RUN"] = "true"
 
-from src.alpaca_client import AlpacaClient
-from src.data import bars_to_dict, check_stale, get_bars_df, latest_bar_age_minutes
+from src.alpaca_client import AlpacaClient, AlpacaError
+from src.data import bars_to_dict, check_stale, get_bars_df, latest_bar_age_minutes, _is_feed_permission_error
 from src.plan import write_plan, write_snapshot
 from src.reporting import append_data_log, append_signal_log, print_signals, print_target_weights
 from src.strategy import build_portfolio, compute_breadth, compute_signals
@@ -56,11 +56,13 @@ def main():
     equity_symbols = [s for s in all_symbols if s not in (fallback,)]
 
     client = AlpacaClient()
+    data_feed = client.data_feed
 
     print("=" * 60)
     print("Stage 1: Market Data + Signal Plan  [NO ORDERS]")
     print("=" * 60)
     print(f"Universe: {len(all_symbols)} symbols  |  fallback={fallback}  benchmark={benchmark}")
+    print(f"Data feed: {data_feed}  |  ALLOW_DATA_FEED_FALLBACK={__import__('os').environ.get('ALLOW_DATA_FEED_FALLBACK', 'false')}")
 
     # ---- Fetch account state (read-only) ----
     print("\n[account] Fetching account, positions, orders, clock...")
@@ -73,8 +75,8 @@ def main():
     print(f"  Equity: ${equity:,.2f}  |  Market: {'OPEN' if market_open else 'CLOSED'}")
 
     # ---- Fetch market data ----
-    print("\n[data] Fetching daily bars (300d lookback)...")
-    bars = get_bars_df(client, all_symbols, lookback_days=400)
+    print(f"\n[data] Fetching daily bars (400d lookback, feed={data_feed})...")
+    bars = get_bars_df(client, all_symbols, lookback_days=400, feed=data_feed)
     n_syms = bars.index.get_level_values("symbol").nunique()
     print(f"  Received bars for {n_syms}/{len(all_symbols)} symbols")
     check_stale(bars, int(cfg["stale_data_minutes"]))
@@ -82,10 +84,19 @@ def main():
     print(f"  Data age: {age_h:.1f}h")
 
     # ---- Fetch latest quotes (for spread info in snapshot) ----
-    print("\n[quotes] Fetching latest quotes...")
+    print(f"\n[quotes] Fetching latest quotes (feed={data_feed})...")
     try:
-        quotes_raw = client.get_latest_quotes(all_symbols)
+        quotes_raw = client.get_latest_quotes(all_symbols, feed=data_feed)
         print(f"  Received quotes for {len(quotes_raw.get('quotes', {}))} symbols")
+    except AlpacaError as e:
+        if _is_feed_permission_error(str(e)):
+            raise AlpacaError(
+                f"Quote feed '{data_feed}' returned a subscription/permission error. "
+                f"Set ALPACA_DATA_FEED to a supported feed or ALLOW_DATA_FEED_FALLBACK=true. "
+                f"Error: {e}"
+            ) from e
+        print(f"  [warn] Quote fetch failed (non-feed error): {e} — spread check disabled")
+        quotes_raw = {}
     except Exception as e:
         print(f"  [warn] Quote fetch failed: {e} — spread check disabled")
         quotes_raw = {}
@@ -96,6 +107,7 @@ def main():
         "generated_at": __import__("datetime").datetime.now(
             __import__("datetime").timezone.utc
         ).isoformat(),
+        "data_feed": data_feed,
         "bars": bars_dict,
         "quotes": quotes_raw,
         "account": account,
@@ -139,6 +151,7 @@ def main():
         "market_open": market_open,
         "equity": equity,
         "data_hash": plan["data_hash"],
+        "data_feed": data_feed,
     })
     print("\n[log] Appended memory/SIGNAL-LOG.md and memory/DATA-LOG.md")
 

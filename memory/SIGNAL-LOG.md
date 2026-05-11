@@ -167,3 +167,25 @@ Tracks each signal computation: regime, breadth, eligible symbols, target weight
 - AMD: 4.29%
 - QCOM: 4.10%
 - Cash: 10.00%
+
+## 2026-05-11T18:23:28+00:00 — Signal Check
+
+- Regime: RISK_ON
+- Breadth: 55.2%
+- Eligible: 13/28 scored
+- Data hash: a88eae11b7fd2377
+
+**Target weights:**
+
+- KO: 13.40%
+- WMT: 11.24%
+- PEP: 10.12%
+- GOOGL: 8.91%
+- MRK: 8.45%
+- AMZN: 8.29%
+- XOM: 7.58%
+- AVGO: 6.76%
+- LLY: 6.70%
+- AMD: 4.42%
+- QCOM: 4.12%
+- Cash: 10.00%

@@ -1,27 +1,67 @@
 """Market data fetching and validation."""
+import os
 from datetime import datetime, timedelta, timezone
-from typing import List
+from typing import List, Optional
 
 import pandas as pd
 
 from src.alpaca_client import AlpacaClient, AlpacaError
 
+# Known feed alternatives for opt-in fallback (ALLOW_DATA_FEED_FALLBACK=true).
+_FEED_FALLBACK = {"iex": "sip", "sip": "iex"}
+
+_FEED_ERR_SIGNALS = ("HTTP 403", "HTTP 422", "subscription", "forbidden", "not authorized")
+
+
+def _is_feed_permission_error(msg: str) -> bool:
+    low = msg.lower()
+    return any(s.lower() in low for s in _FEED_ERR_SIGNALS)
+
 
 def get_bars_df(
-    client: AlpacaClient, symbols: List[str], lookback_days: int = 300
+    client: AlpacaClient,
+    symbols: List[str],
+    lookback_days: int = 300,
+    feed: Optional[str] = None,
 ) -> pd.DataFrame:
     """
     Fetch daily bars via Alpaca /v2/stocks/bars.
     Returns DataFrame with MultiIndex (symbol, date) and columns:
     open, high, low, close, volume.
+
+    Feed is resolved from (in order): explicit feed arg → ALPACA_DATA_FEED env → "iex".
+    On feed subscription/permission errors, fails closed unless ALLOW_DATA_FEED_FALLBACK=true.
     """
+    feed = feed or client.data_feed
+    allow_fallback = os.environ.get("ALLOW_DATA_FEED_FALLBACK", "false").lower() == "true"
+
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=lookback_days)
-    raw = client.get_bars(
-        symbols,
-        start.strftime("%Y-%m-%d"),
-        end.strftime("%Y-%m-%d"),
-    )
+    start_str = start.strftime("%Y-%m-%d")
+    end_str = end.strftime("%Y-%m-%d")
+
+    try:
+        raw = client.get_bars(symbols, start_str, end_str, feed=feed)
+    except AlpacaError as exc:
+        msg = str(exc)
+        if _is_feed_permission_error(msg):
+            fallback = _FEED_FALLBACK.get(feed)
+            if allow_fallback and fallback:
+                print(
+                    f"  [warn] Feed '{feed}' returned a permission/subscription error. "
+                    f"Falling back to '{fallback}' (ALLOW_DATA_FEED_FALLBACK=true)."
+                )
+                raw = client.get_bars(symbols, start_str, end_str, feed=fallback)
+            else:
+                raise AlpacaError(
+                    f"Feed '{feed}' failed with a subscription/permission error and "
+                    f"ALLOW_DATA_FEED_FALLBACK=false. "
+                    f"Set ALPACA_DATA_FEED to a feed your subscription supports, "
+                    f"or set ALLOW_DATA_FEED_FALLBACK=true to enable fallback. "
+                    f"Original error: {msg}"
+                ) from exc
+        else:
+            raise
     bars_by_symbol = raw.get("bars", {})
 
     frames = []

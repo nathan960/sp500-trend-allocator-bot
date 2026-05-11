@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T21:14:31.648508+00:00",
+  "generated_at": "2026-05-11T22:31:18.813184+00:00",
   "data_feed": "iex",
   "bars": {
     "AAPL": [
@@ -66065,122 +66065,18 @@
   },
   "quotes": {
     "quotes": {
-      "MA": {
-        "ap": 520.8,
-        "as": 40,
-        "ax": "V",
-        "bp": 470.25,
-        "bs": 40,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.002399937Z",
-        "z": "A"
-      },
-      "BIL": {
-        "ap": 91.49,
-        "as": 2300,
-        "ax": "V",
-        "bp": 91.47,
-        "bs": 43000,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:31:03.209023771Z",
-        "z": "B"
-      },
-      "MRK": {
+      "PEP": {
         "ap": 0,
         "as": 0,
         "ax": " ",
-        "bp": 106.05,
-        "bs": 100,
+        "bp": 144.41,
+        "bs": 400,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:03.019260358Z",
-        "z": "A"
-      },
-      "JPM": {
-        "ap": 0,
-        "as": 0,
-        "ax": " ",
-        "bp": 286.5,
-        "bs": 40,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:01.910127447Z",
-        "z": "A"
-      },
-      "CRM": {
-        "ap": 0,
-        "as": 0,
-        "ax": " ",
-        "bp": 170.71,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:03.669155616Z",
-        "z": "A"
-      },
-      "ORCL": {
-        "ap": 204.26,
-        "as": 100,
-        "ax": "V",
-        "bp": 184.87,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.002582614Z",
-        "z": "A"
-      },
-      "XOM": {
-        "ap": 156.18,
-        "as": 100,
-        "ax": "V",
-        "bp": 141.19,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.12016144Z",
-        "z": "A"
-      },
-      "KO": {
-        "ap": 82.44,
-        "as": 100,
-        "ax": "V",
-        "bp": 74.41,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:01.093662957Z",
-        "z": "A"
-      },
-      "ABBV": {
-        "ap": 0,
-        "as": 0,
-        "ax": " ",
-        "bp": 190.95,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:01.60226576Z",
-        "z": "A"
+        "t": "2026-05-11T20:00:03.733853054Z",
+        "z": "C"
       },
       "WMT": {
         "ap": 133.7,
@@ -66195,6 +66091,45 @@
         "t": "2026-05-11T20:00:03.505326523Z",
         "z": "C"
       },
+      "KO": {
+        "ap": 82.44,
+        "as": 100,
+        "ax": "V",
+        "bp": 74.41,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:01.093662957Z",
+        "z": "A"
+      },
+      "COST": {
+        "ap": 1037.99,
+        "as": 40,
+        "ax": "V",
+        "bp": 951.9,
+        "bs": 40,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.004177095Z",
+        "z": "C"
+      },
+      "XOM": {
+        "ap": 156.18,
+        "as": 100,
+        "ax": "V",
+        "bp": 141.19,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.12016144Z",
+        "z": "A"
+      },
       "PG": {
         "ap": 150.82,
         "as": 100,
@@ -66208,6 +66143,32 @@
         "t": "2026-05-11T20:00:00.142324758Z",
         "z": "A"
       },
+      "AMD": {
+        "ap": 485.52,
+        "as": 100,
+        "ax": "V",
+        "bp": 438.14,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:02.440974701Z",
+        "z": "C"
+      },
+      "QCOM": {
+        "ap": 247.27,
+        "as": 100,
+        "ax": "V",
+        "bp": 223.53,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.008663963Z",
+        "z": "C"
+      },
       "AAPL": {
         "ap": 0,
         "as": 0,
@@ -66220,19 +66181,6 @@
         ],
         "t": "2026-05-11T20:00:05.408377026Z",
         "z": "C"
-      },
-      "UNH": {
-        "ap": 0,
-        "as": 0,
-        "ax": " ",
-        "bp": 361,
-        "bs": 40,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:02.059248054Z",
-        "z": "A"
       },
       "GOOGL": {
         "ap": 413.31,
@@ -66260,121 +66208,56 @@
         "t": "2026-05-11T20:00:00.001224132Z",
         "z": "C"
       },
-      "V": {
-        "ap": 341.04,
+      "HD": {
+        "ap": 327.43,
         "as": 40,
         "ax": "V",
-        "bp": 308.87,
+        "bp": 294.61,
         "bs": 40,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:00.004355764Z",
+        "t": "2026-05-11T20:00:00.005405736Z",
         "z": "A"
       },
-      "ADBE": {
+      "NFLX": {
         "ap": 0,
         "as": 0,
         "ax": " ",
-        "bp": 233.22,
-        "bs": 40,
+        "bp": 82.17,
+        "bs": 100,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:03.398878991Z",
+        "t": "2026-05-11T20:00:02.646929129Z",
         "z": "C"
       },
-      "NVDA": {
+      "JPM": {
         "ap": 0,
         "as": 0,
         "ax": " ",
-        "bp": 218.91,
-        "bs": 200,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:02.624918382Z",
-        "z": "C"
-      },
-      "BAC": {
-        "ap": 53.7,
-        "as": 100,
-        "ax": "V",
-        "bp": 48.46,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.002477353Z",
-        "z": "A"
-      },
-      "LLY": {
-        "ap": 1017.49,
-        "as": 40,
-        "ax": "V",
-        "bp": 918.65,
+        "bp": 286.5,
         "bs": 40,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:00.003636771Z",
+        "t": "2026-05-11T20:00:01.910127447Z",
         "z": "A"
       },
-      "QCOM": {
-        "ap": 247.27,
-        "as": 100,
-        "ax": "V",
-        "bp": 223.53,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.008663963Z",
-        "z": "C"
-      },
-      "AMD": {
-        "ap": 485.52,
-        "as": 100,
-        "ax": "V",
-        "bp": 438.14,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:02.440974701Z",
-        "z": "C"
-      },
-      "AMZN": {
-        "ap": 283.48,
-        "as": 100,
-        "ax": "V",
-        "bp": 256.11,
-        "bs": 100,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:00.000578344Z",
-        "z": "C"
-      },
-      "COST": {
-        "ap": 1037.99,
-        "as": 40,
-        "ax": "V",
-        "bp": 951.9,
+      "AVGO": {
+        "ap": 0,
+        "as": 0,
+        "ax": " ",
+        "bp": 405.13,
         "bs": 40,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:00.004177095Z",
+        "t": "2026-05-11T20:00:04.305956952Z",
         "z": "C"
       },
       "MSFT": {
@@ -66390,30 +66273,82 @@
         "t": "2026-05-11T20:00:03.598811778Z",
         "z": "C"
       },
-      "PEP": {
-        "ap": 0,
-        "as": 0,
-        "ax": " ",
-        "bp": 144.41,
-        "bs": 400,
-        "bx": "V",
-        "c": [
-          "R"
-        ],
-        "t": "2026-05-11T20:00:03.733853054Z",
-        "z": "C"
-      },
-      "HD": {
-        "ap": 327.43,
+      "MA": {
+        "ap": 520.8,
         "as": 40,
         "ax": "V",
-        "bp": 294.61,
+        "bp": 470.25,
         "bs": 40,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:00.005405736Z",
+        "t": "2026-05-11T20:00:00.002399937Z",
+        "z": "A"
+      },
+      "LLY": {
+        "ap": 1017.49,
+        "as": 40,
+        "ax": "V",
+        "bp": 918.65,
+        "bs": 40,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.003636771Z",
+        "z": "A"
+      },
+      "BAC": {
+        "ap": 53.7,
+        "as": 100,
+        "ax": "V",
+        "bp": 48.46,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.002477353Z",
+        "z": "A"
+      },
+      "ABBV": {
+        "ap": 0,
+        "as": 0,
+        "ax": " ",
+        "bp": 190.95,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:01.60226576Z",
+        "z": "A"
+      },
+      "UNH": {
+        "ap": 0,
+        "as": 0,
+        "ax": " ",
+        "bp": 361,
+        "bs": 40,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:02.059248054Z",
+        "z": "A"
+      },
+      "MRK": {
+        "ap": 0,
+        "as": 0,
+        "ax": " ",
+        "bp": 106.05,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:03.019260358Z",
         "z": "A"
       },
       "SPY": {
@@ -66429,30 +66364,95 @@
         "t": "2026-05-11T20:01:29.881372127Z",
         "z": "B"
       },
-      "AVGO": {
+      "NVDA": {
         "ap": 0,
         "as": 0,
         "ax": " ",
-        "bp": 405.13,
+        "bp": 218.91,
+        "bs": 200,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:02.624918382Z",
+        "z": "C"
+      },
+      "ADBE": {
+        "ap": 0,
+        "as": 0,
+        "ax": " ",
+        "bp": 233.22,
         "bs": 40,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:04.305956952Z",
+        "t": "2026-05-11T20:00:03.398878991Z",
         "z": "C"
       },
-      "NFLX": {
+      "V": {
+        "ap": 341.04,
+        "as": 40,
+        "ax": "V",
+        "bp": 308.87,
+        "bs": 40,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.004355764Z",
+        "z": "A"
+      },
+      "CRM": {
         "ap": 0,
         "as": 0,
         "ax": " ",
-        "bp": 82.17,
+        "bp": 170.71,
         "bs": 100,
         "bx": "V",
         "c": [
           "R"
         ],
-        "t": "2026-05-11T20:00:02.646929129Z",
+        "t": "2026-05-11T20:00:03.669155616Z",
+        "z": "A"
+      },
+      "BIL": {
+        "ap": 91.49,
+        "as": 2300,
+        "ax": "V",
+        "bp": 91.47,
+        "bs": 43000,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:31:03.209023771Z",
+        "z": "B"
+      },
+      "ORCL": {
+        "ap": 204.26,
+        "as": 100,
+        "ax": "V",
+        "bp": 184.87,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.002582614Z",
+        "z": "A"
+      },
+      "AMZN": {
+        "ap": 283.48,
+        "as": 100,
+        "ax": "V",
+        "bp": 256.11,
+        "bs": 100,
+        "bx": "V",
+        "c": [
+          "R"
+        ],
+        "t": "2026-05-11T20:00:00.000578344Z",
         "z": "C"
       }
     }
@@ -66467,16 +66467,16 @@
     "options_approved_level": 3,
     "options_trading_level": 3,
     "currency": "USD",
-    "buying_power": "119976.99",
-    "regt_buying_power": "119976.99",
+    "buying_power": "120056.44",
+    "regt_buying_power": "120056.44",
     "daytrading_buying_power": "0",
-    "effective_buying_power": "119976.99",
-    "non_marginable_buying_power": "57988.49",
-    "options_buying_power": "59988.49",
+    "effective_buying_power": "120056.44",
+    "non_marginable_buying_power": "58028.21",
+    "options_buying_power": "60028.21",
     "bod_dtbp": "0",
     "cash": "20865.8",
     "accrued_fees": "0",
-    "portfolio_value": "99111.19",
+    "portfolio_value": "99190.64",
     "pattern_day_trader": false,
     "trading_blocked": false,
     "transfers_blocked": false,
@@ -66485,13 +66485,13 @@
     "trade_suspended_by_user": false,
     "multiplier": "2",
     "shorting_enabled": true,
-    "equity": "99111.19",
+    "equity": "99190.64",
     "last_equity": "99547.57227868109",
-    "long_market_value": "78245.39",
+    "long_market_value": "78324.84",
     "short_market_value": "0",
-    "position_market_value": "78245.39",
-    "initial_margin": "39122.69",
-    "maintenance_margin": "23473.62",
+    "position_market_value": "78324.84",
+    "initial_margin": "39162.42",
+    "maintenance_margin": "23497.45",
     "last_maintenance_margin": "0",
     "sma": "31164.58",
     "daytrade_count": 0,
@@ -66511,15 +66511,15 @@
       "qty_available": "9.199020644",
       "avg_entry_price": "463.57",
       "side": "long",
-      "market_value": "4209.747817",
+      "market_value": "4220.418681",
       "cost_basis": "4264.39",
-      "unrealized_pl": "-54.642183",
-      "unrealized_plpc": "-0.01281",
-      "unrealized_intraday_pl": "-54.642183",
-      "unrealized_intraday_plpc": "-0.01281",
-      "current_price": "457.63",
+      "unrealized_pl": "-43.971319",
+      "unrealized_plpc": "-0.01031",
+      "unrealized_intraday_pl": "-43.971319",
+      "unrealized_intraday_plpc": "-0.01031",
+      "current_price": "458.79",
       "lastday_price": "455.19",
-      "change_today": "0.00536"
+      "change_today": "0.00791"
     },
     {
       "asset_id": "f801f835-bfe6-4a9d-a6b1-ccbb84bfd75f",
@@ -66531,15 +66531,15 @@
       "qty_available": "30.137278761",
       "avg_entry_price": "271.205641",
       "side": "long",
-      "market_value": "8097.886803",
+      "market_value": "8109.941715",
       "cost_basis": "8173.400004",
-      "unrealized_pl": "-75.513201",
-      "unrealized_plpc": "-0.00924",
-      "unrealized_intraday_pl": "-75.513201",
-      "unrealized_intraday_plpc": "-0.00924",
-      "current_price": "268.7",
+      "unrealized_pl": "-63.458289",
+      "unrealized_plpc": "-0.00776",
+      "unrealized_intraday_pl": "-63.458289",
+      "unrealized_intraday_plpc": "-0.00776",
+      "current_price": "269.1",
       "lastday_price": "272.68",
-      "change_today": "-0.0146"
+      "change_today": "-0.01313"
     },
     {
       "asset_id": "7a8b4fcf-0622-47ef-8541-de7f70ffc0c4",
@@ -66551,15 +66551,15 @@
       "qty_available": "15.3522891",
       "avg_entry_price": "430.3",
       "side": "long",
-      "market_value": "6559.726087",
+      "market_value": "6583.061566",
       "cost_basis": "6606.09",
-      "unrealized_pl": "-46.363913",
-      "unrealized_plpc": "-0.00702",
-      "unrealized_intraday_pl": "-46.363913",
-      "unrealized_intraday_plpc": "-0.00702",
-      "current_price": "427.28",
+      "unrealized_pl": "-23.028434",
+      "unrealized_plpc": "-0.00349",
+      "unrealized_intraday_pl": "-23.028434",
+      "unrealized_intraday_plpc": "-0.00349",
+      "current_price": "428.8",
       "lastday_price": "430",
-      "change_today": "-0.00633"
+      "change_today": "-0.00279"
     },
     {
       "asset_id": "69b15845-7c63-4586-b274-1cfdfe9df3d8",
@@ -66571,15 +66571,15 @@
       "qty_available": "22.265300948",
       "avg_entry_price": "394.42",
       "side": "long",
-      "market_value": "8660.311457",
+      "market_value": "8663.205946",
       "cost_basis": "8781.88",
-      "unrealized_pl": "-121.568543",
-      "unrealized_plpc": "-0.01384",
-      "unrealized_intraday_pl": "-121.568543",
-      "unrealized_intraday_plpc": "-0.01384",
-      "current_price": "388.96",
+      "unrealized_pl": "-118.674054",
+      "unrealized_plpc": "-0.01351",
+      "unrealized_intraday_pl": "-118.674054",
+      "unrealized_intraday_plpc": "-0.01351",
+      "current_price": "389.09",
       "lastday_price": "400.8",
-      "change_today": "-0.02954"
+      "change_today": "-0.02922"
     },
     {
       "asset_id": "3795cafe-fd54-4f66-a31e-66774be875ca",
@@ -66591,15 +66591,15 @@
       "qty_available": "168.902379733",
       "avg_entry_price": "78.16",
       "side": "long",
-      "market_value": "13279.105095",
+      "market_value": "13285.86119",
       "cost_basis": "13201.41",
-      "unrealized_pl": "77.695095",
-      "unrealized_plpc": "0.00589",
-      "unrealized_intraday_pl": "77.695095",
-      "unrealized_intraday_plpc": "0.00589",
-      "current_price": "78.62",
+      "unrealized_pl": "84.45119",
+      "unrealized_plpc": "0.0064",
+      "unrealized_intraday_pl": "84.45119",
+      "unrealized_intraday_plpc": "0.0064",
+      "current_price": "78.66",
       "lastday_price": "78.42",
-      "change_today": "0.00255"
+      "change_today": "0.00306"
     },
     {
       "asset_id": "0d56791f-7395-40fa-853b-7b852bd9a7bf",
@@ -66611,15 +66611,15 @@
       "qty_available": "74.065852363",
       "avg_entry_price": "112.98",
       "side": "long",
-      "market_value": "8250.195295",
+      "market_value": "8242.048051",
       "cost_basis": "8367.96",
-      "unrealized_pl": "-117.764705",
-      "unrealized_plpc": "-0.01407",
-      "unrealized_intraday_pl": "-117.764705",
-      "unrealized_intraday_plpc": "-0.01407",
-      "current_price": "111.39",
+      "unrealized_pl": "-125.911949",
+      "unrealized_plpc": "-0.01505",
+      "unrealized_intraday_pl": "-125.911949",
+      "unrealized_intraday_plpc": "-0.01505",
+      "current_price": "111.28",
       "lastday_price": "111.38",
-      "change_today": "0.00009"
+      "change_today": "-0.0009"
     },
     {
       "asset_id": "7b7466c4-5066-4e3e-80e6-8da1c835ce56",
@@ -66631,15 +66631,15 @@
       "qty_available": "67.477402253",
       "avg_entry_price": "150.9",
       "side": "long",
-      "market_value": "10079.092827",
+      "market_value": "10091.245507",
       "cost_basis": "10182.34",
-      "unrealized_pl": "-103.247173",
-      "unrealized_plpc": "-0.01014",
-      "unrealized_intraday_pl": "-103.247173",
-      "unrealized_intraday_plpc": "-0.01014",
-      "current_price": "149.3699",
+      "unrealized_pl": "-91.094493",
+      "unrealized_plpc": "-0.00895",
+      "unrealized_intraday_pl": "-91.094493",
+      "unrealized_intraday_plpc": "-0.00895",
+      "current_price": "149.55",
       "lastday_price": "154.62",
-      "change_today": "-0.03395"
+      "change_today": "-0.03279"
     },
     {
       "asset_id": "3f3e0ff9-599f-4fec-8842-6bc53f5129a1",
@@ -66651,15 +66651,15 @@
       "qty_available": "90.588755331",
       "avg_entry_price": "128.95",
       "side": "long",
-      "market_value": "11536.73164",
+      "market_value": "11547.348642",
       "cost_basis": "11681.42",
-      "unrealized_pl": "-144.68836",
-      "unrealized_plpc": "-0.01239",
-      "unrealized_intraday_pl": "-144.68836",
-      "unrealized_intraday_plpc": "-0.01239",
-      "current_price": "127.3528",
+      "unrealized_pl": "-134.071358",
+      "unrealized_plpc": "-0.01148",
+      "unrealized_intraday_pl": "-134.071358",
+      "unrealized_intraday_plpc": "-0.01148",
+      "current_price": "127.47",
       "lastday_price": "130.43",
-      "change_today": "-0.02359"
+      "change_today": "-0.02269"
     },
     {
       "asset_id": "092efc51-b66b-4355-8132-d9c3796b9a76",
@@ -66671,15 +66671,15 @@
       "qty_available": "50.652767452",
       "avg_entry_price": "147.97",
       "side": "long",
-      "market_value": "7572.588734",
+      "market_value": "7581.706232",
       "cost_basis": "7495.09",
-      "unrealized_pl": "77.498734",
-      "unrealized_plpc": "0.01034",
-      "unrealized_intraday_pl": "77.498734",
-      "unrealized_intraday_plpc": "0.01034",
-      "current_price": "149.5",
+      "unrealized_pl": "86.616232",
+      "unrealized_plpc": "0.01156",
+      "unrealized_intraday_pl": "86.616232",
+      "unrealized_intraday_plpc": "0.01156",
+      "current_price": "149.68",
       "lastday_price": "144.57",
-      "change_today": "0.0341"
+      "change_today": "0.03535"
     }
   ],
   "open_orders": [],
@@ -66687,6 +66687,6 @@
     "is_open": false,
     "next_close": "2026-05-12T16:00:00-04:00",
     "next_open": "2026-05-12T09:30:00-04:00",
-    "timestamp": "2026-05-11T17:14:31.03609474-04:00"
+    "timestamp": "2026-05-11T18:31:18.004523395-04:00"
   }
 }

@@ -1,21 +1,22 @@
 {
-  "generated_at": "2026-05-11T21:14:31.731689+00:00",
+  "generated_at": "2026-05-12T13:35:58.705984+00:00",
   "plan_max_age_minutes": 90,
   "strategy_version": "2.0",
   "regime": "risk_on",
   "breadth": 0.517241,
   "target_weights": {
-    "AMD": 0.049178,
-    "AMZN": 0.093105,
-    "AVGO": 0.076495,
-    "GOOGL": 0.09835,
-    "KO": 0.15,
-    "LLY": 0.076052,
-    "MRK": 0.094604,
-    "QCOM": 0.047052,
-    "WMT": 0.127862,
-    "XOM": 0.085785
+    "AMD": 0.041107,
+    "AMZN": 0.083239,
+    "AVGO": 0.062974,
+    "GOOGL": 0.086617,
+    "KO": 0.130708,
+    "LLY": 0.066432,
+    "MRK": 0.082518,
+    "NVDA": 0.068847,
+    "UNH": 0.087288,
+    "WMT": 0.113055,
+    "XOM": 0.077215
   },
-  "data_hash": "ec7d4cf223ec2d1f",
+  "data_hash": "12537718108a6106",
   "approved": true
 }

@@ -86,3 +86,16 @@ DRY_RUN runs are logged with [DRY_RUN] tag.
 - BUY LLY notional=$6,596.52 [skipped_wide_spread]
 - BUY AVGO notional=$6,371.08 [skipped_wide_spread]
 - BUY AMD notional=$4,210.23 [dry_run]
+
+## 2026-05-12T14:34:03+00:00 — Trade Execution [LIVE_PAPER]
+
+- Regime: RISK_ON
+- Plan age at execution: see trade_plan.json generated_at
+- Pre-execution equity: $99,217.84
+- Orders submitted: 1  dry-run: 0  skipped: 2  errors: 0
+
+**Orders:**
+
+- BUY UNH notional=$7,864.70 [skipped_wide_spread]
+- BUY NVDA notional=$6,051.79 [submitted]
+- BUY LLY notional=$5,958.43 [skipped_wide_spread]

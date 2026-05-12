@@ -10,21 +10,22 @@
   "last_alpaca_account_check": null,
   "high_water_mark": 99619.78,
   "high_water_mark_date": "2026-05-09",
-  "day_start_equity": 99619.78,
-  "day_start_date": "2026-05-11",
+  "day_start_equity": 99208.13,
+  "day_start_date": "2026-05-12",
   "last_run_trade_execution": "2026-05-11T12:18:22.834699+00:00",
   "last_run_daily_summary": "2026-05-09T21:43:46.690437+00:00",
-  "last_run_position_monitor": "2026-05-11T21:45:47.617680+00:00",
+  "last_run_position_monitor": "2026-05-12T14:45:42.619023+00:00",
   "last_run_strategy_improvement_review": "2026-05-11T17:02:41.412198+00:00",
   "trailing_highs": {
     "AMD": 458.22,
     "AMZN": 268.6158,
     "AVGO": 427.67,
     "GOOGL": 389.1,
-    "KO": 78.58,
-    "MRK": 111.39,
-    "PEP": 149.4205,
-    "WMT": 127.4,
-    "XOM": 149.54
+    "KO": 79.2,
+    "MRK": 111.94,
+    "PEP": 150.9,
+    "WMT": 129.45,
+    "XOM": 150.165,
+    "NVDA": 218.18
   }
 }
